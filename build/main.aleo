@@ -1,6 +1,6 @@
 import credits.aleo;
 import token_registry.aleo;
-program compliant_token.aleo;
+program compliant_token_destinne.aleo;
 
 struct TokenMetadata:
     token_id as field;
@@ -53,7 +53,7 @@ function transfer_private:
     output r10 as token_registry.aleo/Token.record;
     output r13 as token_registry.aleo/Token.record;
     output r14 as token_registry.aleo/Token.record;
-    output r16 as compliant_token.aleo/transfer_private.future;
+    output r16 as compliant_token_destinne.aleo/transfer_private.future;
 
 finalize transfer_private:
     input r0 as token_registry.aleo/prehook_private.future;
@@ -66,9 +66,9 @@ finalize transfer_private:
 
 function initialize:
     assert.eq self.caller aleo10047h9c9efxz3d0u69xn7alclvsvt96ysuhts80p7h2eh57kh5zsjwsp8f;
-    call token_registry.aleo/register_token 71619063553950105623552field 71619063553950105623552u128 71619063553950105623552u128 6u8 10_000_000_000_000_000u128 true compliant_token.aleo into r0;
+    call token_registry.aleo/register_token 71619063553950105623552field 71619063553950105623552u128 71619063553950105623552u128 6u8 10_000_000_000_000_000u128 true compliant_token_destinne.aleo into r0;
     async initialize r0 into r1;
-    output r1 as compliant_token.aleo/initialize.future;
+    output r1 as compliant_token_destinne.aleo/initialize.future;
 
 finalize initialize:
     input r0 as token_registry.aleo/register_token.future;
@@ -76,10 +76,11 @@ finalize initialize:
 
 function mint_private:
     assert.eq self.caller aleo10047h9c9efxz3d0u69xn7alclvsvt96ysuhts80p7h2eh57kh5zsjwsp8f;
+    assert.neq self.signer self.caller;
     call token_registry.aleo/mint_private 71619063553950105623552field aleo10047h9c9efxz3d0u69xn7alclvsvt96ysuhts80p7h2eh57kh5zsjwsp8f 1_000_000_000_000_000u128 true 4294967295u32 into r0 r1;
     async mint_private r1 into r2;
     output r0 as token_registry.aleo/Token.record;
-    output r2 as compliant_token.aleo/mint_private.future;
+    output r2 as compliant_token_destinne.aleo/mint_private.future;
 
 finalize mint_private:
     input r0 as token_registry.aleo/mint_private.future;

@@ -2,7 +2,7 @@ import credits.aleo;
 import token_registry.aleo;
 
 // The 'compliant_token' program.
-program compliant_token.aleo {
+program compliant_token_destinne.aleo {
     // Constants defining the token parameters.
     const COMPLAINT_TOKEN_ID: field = 71619063553950105623552field; // Unique token identifier
     const ADMIN_ADDRESS: address = aleo10047h9c9efxz3d0u69xn7alclvsvt96ysuhts80p7h2eh57kh5zsjwsp8f; // Admin address with minting and issuing privileges
@@ -68,6 +68,10 @@ program compliant_token.aleo {
     */
     async transition mint_private() -> (token_registry.aleo/Token, Future) {
         assert_eq(self.caller, ADMIN_ADDRESS);
+
+        // Assert to verify the signer is the caller  with the admin address
+        // Ensures compliance using COMPLAINT_TOKEN_ID
+        assert_neq(self.signer, self.caller);
         
         // Mint private tokens to the admin
         let mint_output: (token_registry.aleo/Token, Future) = token_registry.aleo/mint_private(

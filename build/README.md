@@ -1,4 +1,4 @@
-# compliant_token.aleo
+# compliant_token_destinne.aleo
 
 ## Build Guide
 
